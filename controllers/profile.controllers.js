@@ -7,6 +7,8 @@ module.exports = {
   updateProfile: async (req, res, next) => {
     try {
       let { first_name, last_name, birth_date } = req.body;
+      // console.log('sdfs');
+      // return res.send(req.file);
 
       let strFile = req.file.buffer.toString('base64');
 
@@ -15,25 +17,20 @@ module.exports = {
         file: strFile,
       });
 
-      const userProfile = await prisma.user.update({
-        where: { id: req.user.id },
-        data: {
-          userProfile: {
-            upsert: {
-              create: {
-                first_name,
-                last_name,
-                birth_date: new Date(birth_date),
-                profile_picture: url,
-              },
-              update: {
-                first_name,
-                last_name,
-                birth_date: new Date(birth_date),
-                profile_picture: url,
-              },
-            },
-          },
+      const userProfile = await prisma.userProfile.upsert({
+        where: { userId: req.user.id },
+        create: {
+          userId: req.user.id,
+          first_name,
+          last_name,
+          birth_date: new Date(birth_date),
+          profile_picture: url,
+        },
+        update: {
+          first_name,
+          last_name,
+          birth_date: new Date(birth_date),
+          profile_picture: url,
         },
       });
 

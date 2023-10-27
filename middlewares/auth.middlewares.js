@@ -6,7 +6,7 @@ const { JWT_SECRET_KEY } = process.env;
 module.exports = {
   restrinct: (req, res, next) => {
     let { authorization } = req.headers;
-    const token = authorization?.split(' ')[1];
+    const token = authorization.split(' ')[1];
     if (!token) {
       return res.status(401).json({
         status: false,
