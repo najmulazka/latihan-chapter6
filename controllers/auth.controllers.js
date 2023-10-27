@@ -38,9 +38,6 @@ module.exports = {
 
       const userProfile = await prisma.userProfile.create({
         data: {
-          // first_name,
-          // last_name,
-          // birth_date: new Date(birth_date),
           userId: user.id,
         },
       });
