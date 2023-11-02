@@ -15,6 +15,7 @@ model User{
   email String @unique
   password String
   userProfile UserProfile?
+  posts Posts[]
 }
 
 model UserProfile{
@@ -23,6 +24,14 @@ model UserProfile{
   last_name String?
   birth_date DateTime?
   profile_picture String?
+  userId Int @unique
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Posts{
+  id Int @id @default(autoincrement())
+  judul String?
+  deskripsi String?
   userId Int @unique
   user User @relation(fields: [userId], references: [id])
 }
