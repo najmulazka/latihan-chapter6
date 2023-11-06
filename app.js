@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const { PORT, SENTRY_DSN, ENV } = process.env;
+const { PORT, SENTRY_DSN, RAILWAY_ENVIRONMENT_NAME } = process.env;
 const Sentry = require('@sentry/node');
 const router = require('./routes/index');
 
@@ -15,7 +15,7 @@ Sentry.init({
   ],
   // Performance Monitoring
   tracesSampleRate: 1.0,
-  // environment:ENV
+  environment: RAILWAY_ENVIRONMENT_NAME,
 });
 
 app.use(express.json());
