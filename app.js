@@ -15,7 +15,7 @@ Sentry.init({
   ],
   // Performance Monitoring
   tracesSampleRate: 1.0,
-  environment:ENV
+  // environment:ENV
 });
 
 app.use(express.json());
